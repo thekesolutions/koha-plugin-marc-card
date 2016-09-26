@@ -17,9 +17,9 @@ use MARC::Record;
 our $VERSION = 1.01;
 
 our $metadata = {
-    name            => 'MARC Card printing',
+    name            => 'Impresión de ficha',
     author          => 'Tomás Cohen Arazi',
-    description     => 'Generates a printable card for items on the DB',
+    description     => 'Generates a printable card for items',
     date_authored   => '2016-09-21',
     date_updated    => '2013-09-21',
     minimum_version => '16.0500000',
