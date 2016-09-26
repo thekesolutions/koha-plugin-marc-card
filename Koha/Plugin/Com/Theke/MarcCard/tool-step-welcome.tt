@@ -1,0 +1,31 @@
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Koha: Item card printing tool</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs">
+    <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo;
+    <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo;
+    Item card printing tool
+</div>
+
+<div id="doc3">
+    <h3>Item card printing tool</h3>
+
+	<form method="get">
+        <input type="hidden" name="class"  value="[% CLASS %]"/>
+        <input type="hidden" name="method" value="[% METHOD %]"/>
+        <input type="hidden" name="step" value="results"/>
+        <p>
+            <label for="barcode">Barcode: </label>
+            <input type="text" name="barcode"/>
+        </p>
+
+		<p><input type="submit" value="Find" /></p>
+
+	</form>
+
+[% INCLUDE 'intranet-bottom.inc' %]
