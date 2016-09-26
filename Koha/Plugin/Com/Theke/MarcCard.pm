@@ -13,7 +13,7 @@ use Koha::Items;
 
 use MARC::Record;
 
-our $VERSION = 1.2;
+our $VERSION = 1.3;
 
 our $metadata = {
     name            => 'Impresión de ficha',
