@@ -7,25 +7,24 @@
 [% INCLUDE 'cat-search.inc' %]
 
 <div id="breadcrumbs">
-    <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo;
+    <a href="/cgi-bin/koha/mainpage.pl">Inicio</a> &rsaquo;
     <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo;
-    Item card printing tool
+    Impresión de ficha
 </div>
 
 <div id="doc3">
-    <h3>Item card printing tool</h3>
+    <h3>Impresión de ficha</h3>
 
 	<form method="get">
         <input type="hidden" name="class"  value="[% CLASS %]"/>
         <input type="hidden" name="method" value="[% METHOD %]"/>
         <input type="hidden" name="step" value="results"/>
         <p>
-            <label for="barcode">Barcode: </label>
+            <label for="barcode">Introduzca el código de barras deseado: </label>
             <input type="text" name="barcode"/>
         </p>
 
-		<p><input type="submit" value="Find" /></p>
-
+		<p><input type="submit" value="Buscar" /></p>
 	</form>
 
 [% INCLUDE 'intranet-bottom.inc' %]

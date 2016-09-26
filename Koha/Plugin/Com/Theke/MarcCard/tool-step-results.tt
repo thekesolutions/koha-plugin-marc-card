@@ -7,14 +7,15 @@
 [% INCLUDE 'cat-search.inc' %]
 
 <div id="breadcrumbs">
-    <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo;
+    <a href="/cgi-bin/koha/mainpage.pl">Inicio</a> &rsaquo;
     <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo;
-    Item card printing tool
+    Impresión de ficha
 </div>
 
 <div id="doc3">
-    <h3>Item card printing tool</h3>
+    <h3>Impresión de ficha</h3>
 
+    <h4>Resúmen</h4>
     <ul>
         <li>Título: [% biblio.title %]</li>
         <li>Autor: [% biblio.author %]</li>
@@ -28,7 +29,7 @@
         <input type="hidden" name="biblionumber" value="[% biblio.biblionumber %]"/>
         <input type="hidden" name="step" value="render"/>
 
-		<p><input type="submit" value="Print"/></p>
+		<p><input type="submit" value="Generar ficha"/></p>
 
 	</form>
 

@@ -1,35 +1,23 @@
 [% INCLUDE 'doc-head-open.inc' %]
- <title>Koha: Item card printing tool</title>
+ <title>Koha: Impresión de ficha</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body>
-[% INCLUDE 'header.inc' %]
-[% INCLUDE 'cat-search.inc' %]
-
-<div id="breadcrumbs">
-    <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo;
-    <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo;
-    Item card printing tool
-</div>
-
-<div id="doc3">
-    <h3>Item card printing tool</h3>
-
-    <ul>
-        <li>Título: [% biblio.title %]</li>
-        <li>Autor: [% biblio.author %]</li>
-        <li>Inventario: [% item.barcode %]</li>
-    </ul>
-
-	<form method="get" target="_blank">
-        <input type="hidden" name="class"  value="[% CLASS %]"/>
-        <input type="hidden" name="method" value="[% METHOD %]"/>
-        <input type="hidden" name="barcode" value="[% item.barcode %]"/>
-        <input type="hidden" name="biblionumber" value="[% biblio.biblionumber %]"/>
-        <input type="hidden" name="step" value="render"/>
-
-		<p><input type="submit" value="Print"/></p>
-
-	</form>
-
-[% INCLUDE 'intranet-bottom.inc' %]
+<div style="width: 100%; display: table; border: 1px solid rgb(230,230,230);">
+ <div style="width: 380px; height: 200px; border: 1px solid rgb(220,220,220); margin: 0 auto 0 auto;">
+  <div id="topo2" style="width: 160px; height: 20px; display: table; background: rgb(240,240,240); position: relative; top: 10px; left: 210px;">
+   <div style="border: 1px solid rgb(210,210,210); display: table-cell; width: 50%; vertical-align: middle; text-align: center;">
+        [% item.itemcallnumber | html %]
+   </div>
+   <div style="border: 1px solid rgb(210,210,210); display: table-cell; width: 50%; vertical-align: middle; text-align: center;">
+        [% item.barcode | html %]
+   </div>
+  </div>
+  <div id="data" style="border: 1px solid rgb(210,210,210); width: 360px; height: 150px; position: relative; left: 10px; top: 20px;">
+    [% biblio.author | html %]<br />
+    [% biblio.title | html %]<br />
+    [% footer %]
+  </div>
+ </div>
+<div>
+</body>

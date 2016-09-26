@@ -6,7 +6,7 @@ use utf8;
 use base qw(Koha::Plugins::Base);
 
 use C4::Auth;
-use C4::Biblio;
+use C4::Biblio qw/GetMarcBiblio/;
 use C4::Context;
 use Koha::Biblios;
 use Koha::Items;
@@ -17,7 +17,7 @@ use MARC::Record;
 our $VERSION = 1.01;
 
 our $metadata = {
-    name            => 'Koha Ficha ISBD Biblioteca Mayor UNC',
+    name            => 'MARC Card printing',
     author          => 'Tomás Cohen Arazi',
     description     => 'Generates a printable card for items on the DB',
     date_authored   => '2016-09-21',
@@ -108,29 +108,37 @@ sub tool_step_render {
     my ( $self, $args ) = @_;
     my $cgi = $self->{'cgi'};
 
-    my $template = $self->get_template({ file => "tool-step-render.tt" });
+    my $template;
+    my $footer = '';
 
-    my $output  = $cgi->param('output');
-    my $barcode = $cgi->param('barcode');
+    my $barcode = $cgi->param('barcode') // '';
 
+    if ( $barcode eq '' ) {
+        $template = $self->get_template( { file => 'tool-step-welcome.tt' } );
+        $template->param( error => 'empty_barcode_passed' );
+    }
+    else {
+        my $item = Koha::Items->search({ barcode => $barcode })->next;
+        if ( not defined $item ) {
+            $template = $self->get_template( { file => 'tool-step-welcome.tt' } );
+            $template->param( error => 'item_not_found' );
+        }
+        else {
+            my $record = GetMarcBiblio( $item->biblionumber );
+            my $biblio = Koha::Biblios->find( $item->biblionumber );
 
-    # my @results;
-    # while ( my $row = $sth->fetchrow_hashref() ) {
-    #     my $marc = MARC::Record::new_from_usmarc( $row->{'marc'} );
-    #     $lint->check_record($marc);
-    #     my @warnings = grep ( !/Subfield _9/, $lint->warnings );
+            if ( defined $record->field('260') ) {
+                $footer = $record->field('260')->as_string('abc');
+            }
 
-    #     push(
-    #         @results,
-    #         {   data     => $row,
-    #             warnings => @warnings
-    #         }
-    #     ) if defined @warnings;
-    # }
-
-    # my $template = $self->get_template( { file => "report-step2.tt" } );
-
-#    $template->param( results => \@results, );
+            $template = $self->get_template({ file => 'tool-step-render.tt' });
+            $template->param(
+                biblio => $biblio,
+                item => $item,
+                footer => $footer
+            );
+        }
+    }
 
     print $cgi->header( -charset => 'utf-8' );
     print $template->output();
