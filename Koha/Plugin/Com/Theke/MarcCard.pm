@@ -11,7 +11,6 @@ use C4::Context;
 use Koha::Biblios;
 use Koha::Items;
 
-use Data::Printer;
 use MARC::Record;
 
 our $VERSION = 1.01;
