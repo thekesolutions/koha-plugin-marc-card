@@ -13,7 +13,7 @@ use Koha::Items;
 
 use MARC::Record;
 
-our $VERSION = 1.01;
+our $VERSION = 1.2;
 
 our $metadata = {
     name            => 'Impresión de ficha',
@@ -114,13 +114,18 @@ sub tool_step_render {
 
     if ( $barcode eq '' ) {
         $template = $self->get_template( { file => 'tool-step-welcome.tt' } );
-        $template->param( error => 'empty_barcode_passed' );
+        $template->param(
+            error => 'empty_barcode_passed'
+        );
     }
     else {
         my $item = Koha::Items->search({ barcode => $barcode })->next;
         if ( not defined $item ) {
             $template = $self->get_template( { file => 'tool-step-welcome.tt' } );
-            $template->param( error => 'item_not_found' );
+            $template->param(
+                error => 'item_not_found',
+                barcode => $barcode
+            );
         }
         else {
             my $record = GetMarcBiblio( $item->biblionumber );

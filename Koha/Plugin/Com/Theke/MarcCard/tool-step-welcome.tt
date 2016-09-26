@@ -15,6 +15,18 @@
 <div id="doc3">
     <h3>Impresión de ficha</h3>
 
+    [% IF ( error ) %]
+    <div class="dialog alert">
+        [% IF ( error == 'empty_barcode_passed' ) %]
+            <h3>Error al procesar búsqueda</h3>
+            <p>Debe ingresar un número de inventario.</p>
+        [% ELSIF ( error == 'item_not_found' ) %]
+            <h3>Error al procesar búsqueda</h3>
+            <p>El código de barras ingresado ([% barcode | html %]) no corresponde con ningún registro de la base de datos.</p>
+        [% END %]
+    </div>
+    [% END %]
+
 	<form method="get">
         <input type="hidden" name="class"  value="[% CLASS %]"/>
         <input type="hidden" name="method" value="[% METHOD %]"/>
